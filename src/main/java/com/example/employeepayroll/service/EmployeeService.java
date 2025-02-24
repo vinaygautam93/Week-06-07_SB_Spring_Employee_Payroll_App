@@ -12,7 +12,7 @@ public class EmployeeService {
 
     private final List<Employee> employeeList = new ArrayList<>();
 
-    // Add an employee using DTO
+    // Add employee using DTO
     public Employee addEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
@@ -24,5 +24,22 @@ public class EmployeeService {
     // Get all employees
     public List<Employee> getAllEmployees() {
         return employeeList;
+    }
+
+    // Update employee by ID
+    public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
+        for (Employee employee : employeeList) {
+            if (employee.getId().equals(id)) {
+                employee.setName(employeeDTO.getName());
+                employee.setSalary(employeeDTO.getSalary());
+                return employee;
+            }
+        }
+        return null;
+    }
+
+    // Delete employee by ID
+    public boolean deleteEmployee(Long id) {
+        return employeeList.removeIf(employee -> employee.getId().equals(id));
     }
 }

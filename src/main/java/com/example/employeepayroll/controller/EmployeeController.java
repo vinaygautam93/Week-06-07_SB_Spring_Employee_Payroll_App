@@ -16,7 +16,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    // Add Employee using DTO
+    // Add employee
     @PostMapping
     public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
         return employeeService.addEmployee(employeeDTO);
@@ -26,5 +26,24 @@ public class EmployeeController {
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
+    }
+
+    // Update employee by ID
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+        Employee updatedEmployee = employeeService.updateEmployee(id, employeeDTO);
+        if (updatedEmployee != null) {
+            return ResponseEntity.ok(updatedEmployee);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // Delete employee by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+        if (employeeService.deleteEmployee(id)) {
+            return ResponseEntity.ok("Employee deleted successfully.");
+        }
+        return ResponseEntity.notFound().build();
     }
 }
