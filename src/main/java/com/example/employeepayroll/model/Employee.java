@@ -1,8 +1,17 @@
 package com.example.employeepayroll.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data  // Lombok generates getters, setters, toString, equals, and hashCode methods
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 
     @Id
@@ -10,19 +19,5 @@ public class Employee {
     private Long id;
 
     private String name;
-    private String email;
     private double salary;
-
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    public double getSalary() { return salary; }
-    public void setSalary(double salary) { this.salary = salary; }
 }
